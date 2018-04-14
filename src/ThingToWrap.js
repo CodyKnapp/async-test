@@ -7,7 +7,7 @@ class ThingToWrap {
     }
 
     handleEvent(event, context, callback) {
-        return this.someService.doStuff()
+        this.someService.doStuff()
             .then(result => {
                 callback();
             }, callback);

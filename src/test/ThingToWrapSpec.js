@@ -10,10 +10,13 @@ describe('ThingToWrap', () => {
         doStuff: sinon.stub()
     };
 
+    let subject;
+    beforeEach(() => {
+        subject = new ThingToWrap(aService);
+    });
+
     it('passes for a successful call', (done) => {
         aService.doStuff.resolves('A thing happened');
-
-        let something = new ThingToWrap(aService);
 
         const callback = (error) => {
             expect(error).to.be.undefined;
@@ -21,13 +24,11 @@ describe('ThingToWrap', () => {
             done();
         };
 
-        something.handleEvent('A thing', 'halp', callback);
+        subject.handleEvent('A thing', 'halp', callback);
     });
 
     it('passes for a failed call', (done) => {
         aService.doStuff.rejects('A bad thing happened');
-
-        let something = new ThingToWrap(aService);
 
         const callback = (error) => {
             expect(error.name).to.equal('A bad thing happened');
@@ -35,6 +36,6 @@ describe('ThingToWrap', () => {
             done();
         };
 
-        something.handleEvent('A thing', 'halp', callback);
+        subject.handleEvent('A thing', 'halp', callback);
     })
 });

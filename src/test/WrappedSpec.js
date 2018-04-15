@@ -1,5 +1,5 @@
 const ThingToWrap = require('../ThingToWrap').ThingToWrap;
-const Wrapper = require('../Wrapper').Wrapper;
+const {wrap} = require('../Wrapper');
 const sinon = require('sinon');
 const chai = require('chai');
 const sinonChai = require('sinon-chai');
@@ -20,7 +20,7 @@ describe('Wrapped ThingToWrap', () => {
     it('passes for a successful call', () => {
         aService.doStuff.resolves('A thing happened');
 
-        return Wrapper.wrap(subject.handleEvent, subject)
+        return wrap(subject.handleEvent, subject)
             .run('A thing', 'halp')
             .then(result => {
                 expect(result).to.be.undefined;
@@ -31,7 +31,7 @@ describe('Wrapped ThingToWrap', () => {
     it('reports a good error on failure', () => {
         aService.doStuff.rejects('A bad thing happened');
 
-        return Wrapper.wrap(subject.handleEvent, subject)
+        return wrap(subject.handleEvent, subject)
             .run('a thing', 'onoez')
             .catch(error => expect(error.name).to.equal('A bad thing happened'));
     })

@@ -3,10 +3,6 @@ class Wrapper {
         this.methodRef = methodRef;
     }
 
-    static wrap(methodRef, context) {
-        return new Wrapper(methodRef.bind(context));
-    }
-
     run(...args) {
         return new Promise((resolve, reject) => {
             this.methodRef(...args, (err, data) => {
@@ -17,3 +13,4 @@ class Wrapper {
 }
 
 exports.Wrapper = Wrapper;
+exports.wrap = (methodRef, context) => new Wrapper(methodRef.bind(context));

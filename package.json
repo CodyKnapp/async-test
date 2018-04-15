@@ -1,6 +1,6 @@
 {
   "name": "ndc-util",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A wrapper to help with testing async methods",
   "author": "Cody Knapp <wcodyknapp@gmail.com>",
   "license": "MIT",

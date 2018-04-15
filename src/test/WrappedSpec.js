@@ -21,7 +21,7 @@ describe('Wrapped ThingToWrap', () => {
         aService.doStuff.resolves('A thing happened');
 
         prepare(subject, 'handleEvent')
-            .run('A thing', 'halp')
+            .withArgs('A thing', 'halp')
             .assert(result => {
                 expect(result).to.be.undefined;
                 expect(aService.doStuff).to.have.been.called;
@@ -32,7 +32,7 @@ describe('Wrapped ThingToWrap', () => {
         aService.doStuff.rejects('A bad thing happened');
 
         prepare(subject, 'handleEvent')
-            .run('a thing', 'onoez')
+            .withArgs('a thing', 'onoez')
             .assertError(error => {
                 expect(error.name).to.equal('A bad thing happened');
             });

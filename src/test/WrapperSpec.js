@@ -27,16 +27,25 @@ describe('AsyncWrapper', () => {
         });
     });
 
-    it('run returns a AsyncWrapper with args set', () => {
+    it('withArgs returns a AsyncWrapper with args set', () => {
         testObject = {
             testMethod: (arg1, arg2) => 'Success'
         };
 
         let result = prepare(testObject, 'testMethod')
-            .run('This', 'works');
+            .withArgs('This', 'works');
 
         expect(result instanceof AsyncWrapper).to.be.true;
         expect(result.args).to.deep.equal(['This', 'works']);
+    });
+
+    it('allows the promise to resolve if withArgs is not called', () => {
+        testObject = {
+            testMethod: (callback) => {callback(null, 'Success')}
+        };
+
+        return prepare(testObject, 'testMethod')
+            .assert();
     });
 
     it('allows the promise to resolve if no args or assertions are passed', () => {
@@ -45,7 +54,7 @@ describe('AsyncWrapper', () => {
         };
 
         return prepare(testObject, 'testMethod')
-            .run()
+            .withArgs()
             .assert();
     });
 
@@ -57,7 +66,7 @@ describe('AsyncWrapper', () => {
         };
 
         return prepare(testObject, 'testMethod')
-            .run()
+            .withArgs()
             .assert(result => {
                 expect(result).to.equal('Success')
             });
@@ -71,7 +80,7 @@ describe('AsyncWrapper', () => {
         };
 
         return prepare(testObject, 'testMethod')
-            .run()
+            .withArgs()
             .assertError(error => {
                 expect(error).to.equal('Fail')
             });

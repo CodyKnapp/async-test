@@ -1,6 +1,7 @@
 class AsyncWrapper {
     constructor(context, methodName) {
         this.context = context;
+        this.args = [];
         if (context[methodName] !== undefined) {
             this.methodName = methodName;
         } else {
@@ -8,7 +9,7 @@ class AsyncWrapper {
         }
     }
 
-    run(...args) {
+    withArgs(...args) {
         this.args = args;
         return this;
     }

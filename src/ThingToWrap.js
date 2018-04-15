@@ -10,9 +10,7 @@ class ThingToWrap {
         this.someService.doStuff()
             .then(result => {
                 callback(null);
-            }, error => {
-                callback(error);
-            });
+            }, callback);
     }
 }
 

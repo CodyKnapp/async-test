@@ -33,8 +33,6 @@ describe('Wrapped ThingToWrap', () => {
 
         return Wrapper.wrap(subject.handleEvent, subject)
             .run('a thing', 'onoez')
-            .then(result => {
-                expect(result).to.be.undefined;
-            });
+            .catch(error => expect(error.name).to.equal('A bad thing happened'));
     })
 });

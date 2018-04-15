@@ -1,2 +1,2 @@
 --recursive
-src/test/*Spec.js
+src/**/*Spec.js

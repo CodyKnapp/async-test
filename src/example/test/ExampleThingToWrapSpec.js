@@ -16,7 +16,12 @@ describe('ThingToWrap', () => {
     });
 
     it('passes for a successful call', (done) => {
+        let aService = {
+            doStuff: sinon.stub()
+        };
         aService.doStuff.resolves('A thing happened');
+
+        let subject = new ExampleThingToWrap(aService);
 
         const callback = (error) => {
             expect(error).to.be.undefined;

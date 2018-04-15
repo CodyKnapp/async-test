@@ -19,7 +19,12 @@ class AsyncWrapper {
     }
 
     assertError(assertion) {
-        return this.executeMethod().catch(assertion);
+        return this.executeMethod()
+            .then(() => Promise.reject(new Error('No error was passed from callback when assertError was used')), assertion);
+    }
+
+    promise() {
+        return this.executeMethod();
     }
 
     executeMethod() {

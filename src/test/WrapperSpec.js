@@ -54,7 +54,6 @@ describe('AsyncWrapper', () => {
         };
 
         return prepare(testObject, 'testMethod')
-            .withArgs()
             .assert();
     });
 
@@ -66,7 +65,6 @@ describe('AsyncWrapper', () => {
         };
 
         return prepare(testObject, 'testMethod')
-            .withArgs()
             .assert(result => {
                 expect(result).to.equal('Success')
             });
@@ -80,9 +78,50 @@ describe('AsyncWrapper', () => {
         };
 
         return prepare(testObject, 'testMethod')
-            .withArgs()
             .assertError(error => {
                 expect(error).to.equal('Fail')
+            });
+    });
+
+    it('assertError fails if the callback is ok (no error thrown)', () => {
+        testObject = {
+            testMethod: (callback) => {
+                callback();
+            }
+        };
+
+        return prepare(testObject, 'testMethod')
+            .assertError()
+            .catch(error => {
+                expect(error.message).to.equal('No error was passed from callback when assertError was used');
+            });
+    });
+
+    it('promise returns the promise when it resolves', () => {
+        testObject = {
+            testMethod: (callback) => {
+                callback(null, 'Success');
+            }
+        };
+
+        return prepare(testObject, 'testMethod')
+            .promise()
+            .then(data => {
+                expect(data).to.equal('Success');
+            });
+    });
+
+    it('promise returns the promise when it rejects', () => {
+        testObject = {
+            testMethod: (callback) => {
+                callback('Danger!!');
+            }
+        };
+
+        return prepare(testObject, 'testMethod')
+            .promise()
+            .catch(error => {
+                expect(error).to.equal('Danger!!');
             });
     });
 });

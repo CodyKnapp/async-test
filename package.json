@@ -21,5 +21,6 @@
     "mocha": "^5.1.0",
     "sinon": "^4.5.0",
     "sinon-chai": "^3.0.0"
-  }
+  },
+  "private": true
 }

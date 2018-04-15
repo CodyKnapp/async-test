@@ -1,20 +1,20 @@
 {
   "name": "ndc-util",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A wrapper to help with testing async methods",
   "author": "Cody Knapp <wcodyknapp@gmail.com>",
   "license": "MIT",
+  "main": "src/AsyncWrapper.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/CodyKnapp/async-test"
+    "url": "git://github.com/CodyKnapp/ndc-util"
   },
   "bugs": {
-    "url": "https://github.com/CodyKnapp/async-test/issues"
+    "url": "https://github.com/CodyKnapp/ndc-util/issues"
   },
   "scripts": {
     "test": "mocha --opts mocha.opts",
-    "release:tag": "git tag $(node -p -e \"require('./package.json').version\") && git push origin --tags",
-    "release": "npm test && npm run build && npm run release:tag && npm publish"
+    "release": "npm test && npm publish"
   },
   "devDependencies": {
     "chai": "^4.1.2",

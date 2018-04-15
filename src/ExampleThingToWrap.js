@@ -1,7 +1,7 @@
 
 const injectedService = {};
 
-class ThingToWrap {
+class ExampleThingToWrap {
     constructor(service) {
         this.someService = service;
     }
@@ -9,13 +9,13 @@ class ThingToWrap {
     handleEvent(event, context, callback) {
         this.someService.doStuff()
             .then(result => {
-                callback(null);
+                callback();
             }, callback);
     }
 }
 
-exports.ThingToWrap = ThingToWrap;
+exports.ExampleThingToWrap = ExampleThingToWrap;
 exports.handler = (event, context, callback) => {
-    const handler = new ThingToWrap(injectedService);
+    const handler = new ExampleThingToWrap(injectedService);
     handler.handleEvent(event, context, callback);
 };

@@ -1,8 +1,8 @@
-const ThingToWrap = require('../ThingToWrap').ThingToWrap;
-const {wrap} = require('../Wrapper');
+const {ExampleThingToWrap} = require('../ExampleThingToWrap');
 const sinon = require('sinon');
 const chai = require('chai');
 const sinonChai = require('sinon-chai');
+const {prepare} = require("../AsyncWrapper");
 chai.use(sinonChai);
 const expect = chai.expect;
 
@@ -14,15 +14,15 @@ describe('Wrapped ThingToWrap', () => {
     let subject;
 
     beforeEach(() => {
-        subject = new ThingToWrap(aService);
+        subject = new ExampleThingToWrap(aService);
     });
 
     it('passes for a successful call', () => {
         aService.doStuff.resolves('A thing happened');
 
-        return wrap(subject.handleEvent, subject)
-            .run('A thing', 'halp')
-            .then(result => {
+        prepare(subject, 'handleEvent')
+            .withArgs('A thing', 'halp')
+            .assert(result => {
                 expect(result).to.be.undefined;
                 expect(aService.doStuff).to.have.been.called;
             });
@@ -31,8 +31,10 @@ describe('Wrapped ThingToWrap', () => {
     it('reports a good error on failure', () => {
         aService.doStuff.rejects('A bad thing happened');
 
-        return wrap(subject.handleEvent, subject)
-            .run('a thing', 'onoez')
-            .catch(error => expect(error.name).to.equal('A bad thing happened'));
-    })
+        prepare(subject, 'handleEvent')
+            .withArgs('a thing', 'onoez')
+            .assertError(error => {
+                expect(error.name).to.equal('A bad thing happened');
+            });
+    });
 });

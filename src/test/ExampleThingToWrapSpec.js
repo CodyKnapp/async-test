@@ -1,4 +1,4 @@
-const ThingToWrap = require('../ThingToWrap').ThingToWrap;
+const {ExampleThingToWrap} = require('../ExampleThingToWrap');
 const sinon = require('sinon');
 const chai = require('chai');
 const sinonChai = require('sinon-chai');
@@ -12,7 +12,7 @@ describe('ThingToWrap', () => {
 
     let subject;
     beforeEach(() => {
-        subject = new ThingToWrap(aService);
+        subject = new ExampleThingToWrap(aService);
     });
 
     it('passes for a successful call', (done) => {

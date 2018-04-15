@@ -1,5 +1,5 @@
 {
-  "name": "async-test",
+  "name": "ndc-util",
   "version": "0.1.0",
   "description": "A wrapper to help with testing async methods",
   "author": "Cody Knapp <wcodyknapp@gmail.com>",
@@ -21,6 +21,5 @@
     "mocha": "^5.1.0",
     "sinon": "^4.5.0",
     "sinon-chai": "^3.0.0"
-  },
-  "private": true
+  }
 }

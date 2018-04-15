@@ -9,8 +9,10 @@ class ThingToWrap {
     handleEvent(event, context, callback) {
         this.someService.doStuff()
             .then(result => {
-                callback();
-            }, callback);
+                callback(null);
+            }, error => {
+                callback(error);
+            });
     }
 }
 

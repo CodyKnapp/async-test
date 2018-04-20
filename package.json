@@ -1,6 +1,6 @@
 {
   "name": "ndc-util",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A wrapper to help with testing async methods",
   "author": "Cody Knapp <wcodyknapp@gmail.com>",
   "license": "MIT",
@@ -16,6 +16,11 @@
     "test": "mocha --opts mocha.opts",
     "release": "npm test && npm publish"
   },
+  "keywords": [
+    "async",
+    "promise",
+    "callback"
+  ],
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^5.1.0",
